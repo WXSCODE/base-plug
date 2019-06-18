@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: bisque
+  }
+
+  .wrap {
+    width: 300px;
+    height: 50px;
+    line-height: 50px;
+    background-color: rgb(216, 216, 216);
+    margin: 100px auto;
+    position: relative;
+  }
+
+  .slide {
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgb(216, 216, 216);
+    background-color: #fff;
+    text-align: center;
+    line-height: 50px;
+    color: rgb(196, 196, 196);
+    font-size: 20px;
+    position: absolute;
+    user-select: none;
+    left: 0;
+    top: 0;
+
+  }
+
+  .text {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    /* line-height: 50px; */
+    user-select: none;
+    position: absolute;
+
+  }
+
+  .bg {
+    width: 0;
+    height: 100%;
+    background-color: rgb(80, 171, 255);
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+  }
+</style>
+
+<body>
+  <div class="wrap">
+    <div class="bg"></div>
+    <div class="text" onselectstart="return false;">滑动验证</div>
+    <div class="slide">&gt;&gt;</div>
+
+  </div>
+</body>
+<script>
+  var $ = function (dom) {
+    return document.querySelector(dom)
+  }
+
+  var woWrap = $('.wrap')
+  var woSlide = $('.slide')
+  var woText = $('.text')
+  var woBg = $('.bg')
+  var downX
+  var isDisable = false
+  woSlide.onmousedown = function (e) {
+    console.log(isDisable, 'isDisableisDisable')
+    downX = e.clientX
+    document.onmousemove = function (e) {
+      var moveX = e.clientX
+      var _X = moveX - downX
+
+
+      if (_X < 0) {
+        _X = 0
+      }
+      if (_X > 300 - 50) {
+        _X = 300 - 50
+      }
+      // console.log(_X, '滑动的位置')
+      woSlide.style.left = _X + 'px'
+      woBg.style.width = _X + 'px'
+
+      if (_X === 300 - 50) {
+        woSlide.style.left = _X + 'px'
+        woBg.style.backgroundColor='green'
+        woText.style.color='#fff'
+        woSlide.innerHTML = "&radic;";
+        isDisable = true
+        woSlide.onmousedown = null
+        document.onmousemove = null
+      }
+
+    }
+
+
+
+  }
+  document.onmouseup = function (e) {
+    console.log('松开了鼠标i哦')
+    if (isDisable) {
+      return
+    } else {
+      var upX = e.clientX
+      woSlide.style.left = 0
+      woBg.style.width = 0
+
+    }
+    document.onmousedown = null
+    document.onmousemove = null
+
+  }
+
+</script>
+
+</html>

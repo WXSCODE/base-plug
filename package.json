@@ -1,0 +1,12 @@
+{
+  "name": "base-plug",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/wangyongbin1991/base-plug.git",
+  "author": "SC-201711062325\\Administrator <1441204853@qq.com>",
+  "license": "MIT",
+  "eslint": "^4.19.1",
+  "eslint-friendly-formatter": "^4.0.1",
+  "eslint-loader": "^2.0.0",
+  "eslint-plugin-html": "^4.0.3"
+}
